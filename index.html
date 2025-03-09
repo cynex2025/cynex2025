@@ -1,4 +1,904 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Tech Fest - Interactive Background</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box}body{background-color:#0a0a0a;font-family:Arial,sans-serif;color:#fff}.container{position:relative;width:100vw;min-height:100vh}.node{position:absolute;width:4px;height:4px;background:#4a90e2;border-radius:50%;pointer-events:none;transition:transform .3s ease}.connection{position:absolute;background:linear-gradient(90deg,rgba(74,144,226,.2) 0,rgba(74,144,226,0) 100%);height:1px;transform-origin:left center;pointer-events:none}.node::after{content:'';position:absolute;width:12px;height:12px;background:radial-gradient(circle,rgba(74,144,226,.3) 0,rgba(74,144,226,0) 70%);border-radius:50%;transform:translate(-4px,-4px)}.floating-icon{position:absolute;color:rgba(74,144,226,.2);pointer-events:none;animation:float 6s infinite ease-in-out}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}.mouse-follower{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(74,144,226,.1) 0,rgba(74,144,226,0) 70%);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:all .1s ease}.content{position:relative;z-index:10;padding:2rem;text-align:center}.title{font-size:4rem;font-weight:700;background:linear-gradient(45deg,#4a90e2,#a64ae2);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:1rem}</style></head><body><div class="loader"><div class="wrapper"><div class="catContainer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 733 673" class="catbody"><path fill="#212121" d="M111.002 139.5C270.502 -24.5001 471.503 2.4997 621.002 139.5C770.501 276.5 768.504 627.5 621.002 649.5C473.5 671.5 246 687.5 111.002 649.5C-23.9964 611.5 -48.4982 303.5 111.002 139.5Z"></path><path fill="#212121" d="M184 9L270.603 159H97.3975L184 9Z"></path><path fill="#212121" d="M541 0L627.603 150H454.397L541 0Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 158 564" class="tail"><path fill="#191919" d="M5.97602 76.066C-11.1099 41.6747 12.9018 0 51.3036 0V0C71.5336 0 89.8636 12.2558 97.2565 31.0866C173.697 225.792 180.478 345.852 97.0691 536.666C89.7636 553.378 73.0672 564 54.8273 564V564C16.9427 564 -5.4224 521.149 13.0712 488.085C90.2225 350.15 87.9612 241.089 5.97602 76.066Z"></path></svg><div class="text"><span class="bigzzz">Z</span><span class="zzz">Z</span></div></div><div class="wallContainer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 500 126" class="wall"><line stroke-width="6" stroke="#7C7C7C" y2="3" x2="450" y1="3" x1="50"></line><line stroke-width="6" stroke="#7C7C7C" y2="85" x2="400" y1="85" x1="100"></line><line stroke-width="6" stroke="#7C7C7C" y2="122" x2="375" y1="122" x1="125"></line><line stroke-width="6" stroke="#7C7C7C" y2="43" x2="500" y1="43"></line><line stroke-width="6" stroke="#7C7C7C" y2="1.99391" x2="115.5" y1="43.0061" x1="115.5"></line><line stroke-width="6" stroke="#7C7C7C" y2="2.00002" x2="189" y1="43.0122" x1="189"></line><line stroke-width="6" stroke="#7C7C7C" y2="2.00612" x2="262.5" y1="43.0183" x1="262.5"></line><line stroke-width="6" stroke="#7C7C7C" y2="2.01222" x2="336" y1="43.0244" x1="336"></line><line stroke-width="6" stroke="#7C7C7C" y2="2.01833" x2="409.5" y1="43.0305" x1="409.5"></line><line stroke-width="6" stroke="#7C7C7C" y2="43" x2="153" y1="84.0122" x1="153"></line><line stroke-width="6" stroke="#7C7C7C" y2="43" x2="228" y1="84.0122" x1="228"></line><line stroke-width="6" stroke="#7C7C7C" y2="43" x2="303" y1="84.0122" x1="303"></line><line stroke-width="6" stroke="#7C7C7C" y2="43" x2="378" y1="84.0122" x1="378"></line><line stroke-width="6" stroke="#7C7C7C" y2="84" x2="192" y1="125.012" x1="192"></line><line stroke-width="6" stroke="#7C7C7C" y2="84" x2="267" y1="125.012" x1="267"></line><line stroke-width="6" stroke="#7C7C7C" y2="84" x2="342" y1="125.012" x1="342"></line></svg></div></div></div><header><nav><div class="nav-wrapper"><a href="#" class="logo">AI Tech Fest 2025</a><button class="mobile-menu-btn" onclick="toggleMenu()">☰</button><ul class="nav-links" id="navLinks"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#events">Events</a></li><li><a href="#Tech Events">Tech Events</a></li><li><a href="# LLM Workshop">Workshop</a></li><li><a href="#contact">Contact</a></li></ul></div></nav></header><main><div class="containerrr"><div class="mouse-follower"></div><div id="background"></div><section class="hero"><div class="hero-content"><div class="hero-text"><h1>CYNEX</h1><p>Harness the power of artificial intelligence to transform your business. Our cutting-edge AI solutions help you stay ahead in the digital age.</p><p><i class="fa-regular fa-calendar" style="color:#6200ea"></i>&nbsp;&nbsp;&nbsp;February 28, 2025</p><p><i class="fa-solid fa-location-dot" style="color:#6200ea"></i>&nbsp;&nbsp; Mar Baselios Christian College of Engineering and Technologies</p><p>Harness the power of artificial intelligence to transform your business. Our cutting-edge AI solutions help you stay ahead in the digital age.</p><a href="#events" class="cta-button">Get Started</a></div></div></section><section class="hero has-before" id="home"><div class="container"><p class="section-subtitle">Enjoy The Games</p><h1 class="h1 title hero-title">Epic Games Made For<br>True Gamers!</h1><div class="hero-banner"><div class="image-container"><img src="/image/hero-banner.png" width="850" height="414" alt="hero banner" class="img w-100"></div></div></div></section><section id="events" class="events"><div class="container"><h2>Upcoming online Events</h2><div class="event-grid"><div class="event-card"><img src="/image/fc mobile.jpeg" alt="Football Tournament"><h3>Fc mobile Tournament</h3><p>Join the excitement in this thrilling online event!</p><a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration:none;color:inherit"><button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px"><rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect><path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path><path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path><path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path><path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path><path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path><path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path><path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path><path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path></svg><span class="now">now!</span><span class="play">play</span></button></a></div><div class="event-card"><img src="/image/pubg.jpg" alt="PUBG Championship"><h3>PUBG Championship</h3><p>Battle it out in the ultimate PUBG showdown!</p><a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration:none;color:inherit"><button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px"><rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect><path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path><path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path><path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path><path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path><path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path><path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path><path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path><path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path></svg><span class="now">now!</span><span class="play">play</span></button></a></div><div class="event-card"><img src="/image/free fire tournament poster desing comment for the psd.jpeg" alt="Free Fire Cup"><h3>Free Fire Cup</h3><p>Compete in the hottest mobile battle royale game!</p><a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration:none;color:inherit"><button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px"><rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect><path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path><path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path><path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path><path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path><path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path><path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path><path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path><path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path></svg><span class="now">now!</span><span class="play">play</span></button></a></div><div class="event-card"><img src="/image/pes.jpeg" alt="PES eFootball League"><h3>PES eFootball League</h3><p>Show off your skills in this premier eFootball competition!</p><a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration:none;color:inherit"><button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px"><rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect><path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path><path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path><path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path><path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path><path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path><path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path><path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path><path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path></svg><span class="now">now!</span><span class="play">play</span></button></a></div></div></div></section></main><section id="Tech Events" class="tech-timeline"><h2 class="timeline-title">Upcoming Tech Events</h2><div class="timeline-line"></div><div class="timeline-event" style="animation:fadeInUp .8s .7s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Online Gaming Expo</h3><p class="timeline-desc">"Play anytime, anywhere with our free online games! Enjoy action, strategy, puzzles, and multiplayer fun—no downloads needed. Perfect for solo or friend showdowns, our growing collection has something for every gamer. Dive in now!"</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s .8s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Capture the Flag Challenge</h3><p class="timeline-desc">"Ready for intense Capture the Flag action? Jump into fast-paced, no-download CTF games where strategy meets skill. Team up or go solo, steal the flag, and outsmart your rivals in our thrilling online collection. Play now and claim victory!".</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s .9s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Blind Typing games!</h3><p class="timeline-desc">"Boost your speed and master the keys with our Blind Typing games! Dive into fun, no-download challenges that sharpen your typing skills. Perfect for all levels—race against time or compete with friends. Start typing and level up now!".</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s 1s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Image Prompt for Website</h3><p class="timeline-desc">"A colorful, action-packed scene of a gamer at a glowing keyboard, typing at lightning speed with abstract code and game elements (like flags or puzzles) swirling in the background. Bold neon hues of blue, purple, and green, with a sleek, futuristic vibe to draw in online gaming fans.".</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s 1s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Keyboard Assembly Game</h3><p class="timeline-desc">"Build your perfect keyboard and test your skills! Assemble keys, tweak layouts, and race against time in this fast-paced online challenge. No downloads needed—jump in, create, and type your way to victory!"</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s 1s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">Treasure Hunt Games</h3><p class="timeline-desc">"Embark on epic online treasure hunts! Explore thrilling puzzles, uncover hidden loot, and outsmart rivals—no downloads needed. Dive into the adventure solo or with friends and claim your riches today!"</p><a href="#" class="timeline-button">Register Now</a></div></div><div class="timeline-event" style="animation:fadeInUp .8s 1s forwards"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-date">March 12, 2025</span><h3 class="timeline-title-event">AI-Generated Video Adventures</h3><p class="timeline-desc">"Experience gaming like never before with AI-crafted videos! Watch thrilling treasure hunts and epic challenges come to life—unique, instant, and no downloads required. Dive into the future of fun now!"</p><a href="#" class="timeline-button">Register Now</a></div></div></section><section id=" LLM Workshop"><h2 class="tech-section-title">AI & LLM Workshop</h2><div class="tech-events-container"><div class="tech-event-card" style="animation:fadeInUp .8s .3s forwards"><div class="tech-event-tag">AI & LLM Workshop</div><img src="/image/workshop1.jpg" alt="DevCon 2025"><div class="tech-event-details"><span class="tech-event-date">March 15 2025</span><h3 class="tech-event-title">AI & LLM Workshop</h3><p class="tech-event-location">online workshop</p><p class="tech-event-desc">AI & LLM Workshop at IIT Hyderabad Join this transformative workshop on Artificial Intelligence and Large Language Models, organized by the IEEE Student Branch.</p><a href="https://tek-learn.com/a/va_2gbid5eolfx-dc4dpg" class="tech-event-button"><span>Register</span></a></div></div><div class="tech-event-card" style="animation:fadeInUp .8s .4s forwards"><div class="tech-event-tag">AI-Driven CAD Workshop</div><img src="/image/workshop2.jpg" alt="AI Summit"><div class="tech-event-details"><span class="tech-event-date">March 22, 2025</span><h3 class="tech-event-title">AI-Driven CAD Workshop</h3><p class="tech-event-location">online workshop</p><p class="tech-event-desc">AI-Driven Computer Aided Design Workshop Discover the synergy of AI and Computer Aided Design through this exclusive event hosted at IIT Hyderabad.</p><a href="https://tek-learn.com/a/jzdaysw7l2uszjrf3xatn" class="tech-event-button"><span>Register</span></a></div></div></div></section><section class="food-section"><div class="bg-shape shape-1"></div><div class="bg-shape shape-2"></div><div class="bg-shape shape-3"></div><div class="food-header"><span class="food-eyebrow">Taste the Future</span><h2 class="food-title">AI Food Party</h2><p class="food-subtitle">Experience culinary creations designed by artificial intelligence, blending data-driven flavor combinations with gastronomic traditions</p></div><div class="food-grid"><div class="food-card" style="--i:1"><span class="course-label">AI Day</span><div class="food-card-image"><img src="/image/food1.jpeg" alt="Neural Network Noodles"><div class="ai-indicator"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.5 5.9-4 7.5M12 2a9 9 0 0 0-9 9c0 3.1 1.5 5.9 4 7.5M12 2v2M20.2 7l-1.4 1.4M3.8 7l1.4 1.4M21 13h-2M5 13H3M18 19l-1-1M7 19l1-1"></path><circle cx="12" cy="11" r="4"></circle><path d="M12 15v4"></path></svg>Food Fest</div><div class="stock-indicator available"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Available</div></div><div class="food-card-content"><h3 class="food-card-title">AI Day & Food Fest</h3><p class="food-card-description">AI Day & Food Fest at MBCCET Join us at Mar Baselios Christian College of Engineering and Technology (MBCCET) for an exciting AI Day and Food Fest! Experience cutting-edge AI innovations alongside a vibrant culinary celebration featuring local delicacies and global flavors.</p><div class="food-tags"><span class="food-tag">veg</span><span class="food-tag">non-veg</span></div><div class="dish-info"><div class="dish-stat"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><span>15 min prep</span></div><div class="dish-stat"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7zM15.42 15.42l6.37 6.37"></path><path d="M19.73 10.35a10.1 10.1 0 0 0-.2-1.4 10 10 0 0 0-5.9-6.7 10.12 10.12 0 0 0-8.4.4"></path><path d="M4.89 4.8a10 10 0 0 0-1.2 1.6"></path></svg><span>98% match</span></div></div><div class="rating"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>(128 ratings)</span></div><button class="taste-button">Request Sample</button></div></div></div></section><br><br><br><br><section class="movie-section"><div class="particles"></div><div class="movie-content"><h2 class="movie-title">AI Day: Special Screening</h2><div class="movie-info"><div class="movie-details"><div class="movie-date-time"><div class="movie-item movie-date">Feb 17, 2025</div><div class="movie-item movie-time">7:30 PM</div></div><p class="movie-description">Join us for a special screening of "Artificial: The New Frontier," an award-winning documentary exploring the ethical implications and future possibilities of artificial intelligence. The screening will be followed by a panel discussion with leading AI researchers and ethicists.</p><a href="#" class="movie-button">Reserve Seats</a></div><div class="movie-poster"><img src="/image/movies.jpg" alt="AI Movie Poster"></div></div></div></section><br><br><br><section id="about" class="about-section"><div class="container"><div class="about-grid"><div class="about-text"><h2>About Our AI Vision</h2><p>Founded with a passion for artificial intelligence innovation, our mission is to redefine digital experiences through cutting-edge AI technology. We believe in creating intelligent systems that form meaningful connections between brands and their audiences through adaptive, learning interfaces.</p><p>Our team of AI researchers and engineers works tirelessly to push the boundaries of what's possible in machine learning and neural networks, crafting solutions that are not just technically advanced but also ethically designed with humans at the center.</p><div class="stats-container"><div class="stat-item"><div class="stat-number">85%</div><div class="stat-text">Accuracy Improvement</div></div><div class="stat-item"><div class="stat-number">10M+</div><div class="stat-text">Data Points Processed</div></div><div class="stat-item"><div class="stat-number">24/7</div><div class="stat-text">AI-Powered Assistance</div></div></div></div><div class="about-image"><div class="ai-container" id="ai-visual"><div class="glow-effect"></div><div class="grid-overlay"></div><div class="brain-container"><div class="brain-ring"></div><div class="brain-ring"></div><div class="brain-ring"></div><div class="brain-center"></div></div><div id="particles-container"></div><div id="data-streams-container"></div><div id="connections-container"></div><div id="data-nodes-container"></div><div id="floating-text-container"></div><button class="interact-button" id="interact-button">Interact with AI</button></div></div></div></div></section><div id="contact" class="contact-container"><div class="header"><h1>Connect with AI Innovation</h1><p>Join us in shaping the future of artificial intelligence</p></div><div class="contact-grid"><div class="contact-card"><h2>Event Details</h2><p>Join our upcoming AI Summit featuring cutting-edge developments in machine learning and artificial intelligence.</p><div class="social-icons"><a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a><a href="https://www.instagram.com/.cynex.?igsh=bzF3Nm14M3Y0bmt3" class="instagram"><i class="fa-brands fa-instagram"></i></a></div></div><div class="contact-card"><h2>Contact Information</h2><p>📧 Email: cynex2024@gmail.com</p><p>📱 Phone: 9961774438</p><p>📍 Location: mbccet</p></div></div></div><div class="footer-size"><footer class="footer"><div class="container1"><div class="footer-grid"><div class="footer-column"><h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>AI Solutions</h3><p>Empowering the future with intelligent technologies.</p><div class="social-links"><a href="#" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a><a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a><a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></div></div><div class="footer-column"><h4>Quick Links</h4><ul class="quick-links"><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About Us</a></li><li><a href="#">Contact</a></li></ul></div><div class="footer-column"><h4>Newsletter</h4><p>Stay updated with our latest AI breakthroughs.</p><form class="newsletter-form"><input type="email" placeholder="Your email" class="newsletter-input" required><button type="submit" class="newsletter-btn">Subscribe</button></form></div></div><div class="footer-bottom"><p>&copy; 2025 AI Solutions. All rights reserved.</p></div></div><div class="footer-gradient"></div></footer></div><script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script><script src="./script.js"></script><script src="script.js"></script><script>// Background initialization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tech Fest - Interactive Background</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /*overflow-x: hidden;  Prevent horizontal scrolling */
+            
+            
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: Arial, sans-serif;
+            color: white;
+            
+        }
+        
+
+        /* Main container */
+        .container {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* Neural network nodes */
+        .node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #4a90e2;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+
+        /* Connection lines */
+        .connection {
+            position: absolute;
+            background: linear-gradient(90deg, rgba(74,144,226,0.2) 0%, rgba(74,144,226,0) 100%);
+            height: 1px;
+            transform-origin: left center;
+            pointer-events: none;
+        }
+
+        /* Glow effect for nodes */
+        .node::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, rgba(74,144,226,0.3) 0%, rgba(74,144,226,0) 70%);
+            border-radius: 50%;
+            transform: translate(-4px, -4px);
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(74, 144, 226, 0.2);
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Animation keyframes */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Mouse follower */
+          .mouse-follower {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(74,144,226,0.1) 0%, rgba(74,144,226,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+        }
+
+        /* Content overlay */
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4a90e2, #a64ae2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+ <!--------------------------loader staring--------------------------------------->
+
+ <!-- Loader -->
+ <div class="loader">
+    <div class="wrapper">
+      <div class="catContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 733 673" class="catbody">
+          <path fill="#212121" d="M111.002 139.5C270.502 -24.5001 471.503 2.4997 621.002 139.5C770.501 276.5 768.504 627.5 621.002 649.5C473.5 671.5 246 687.5 111.002 649.5C-23.9964 611.5 -48.4982 303.5 111.002 139.5Z"></path>
+          <path fill="#212121" d="M184 9L270.603 159H97.3975L184 9Z"></path>
+          <path fill="#212121" d="M541 0L627.603 150H454.397L541 0Z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 158 564" class="tail">
+          <path fill="#191919" d="M5.97602 76.066C-11.1099 41.6747 12.9018 0 51.3036 0V0C71.5336 0 89.8636 12.2558 97.2565 31.0866C173.697 225.792 180.478 345.852 97.0691 536.666C89.7636 553.378 73.0672 564 54.8273 564V564C16.9427 564 -5.4224 521.149 13.0712 488.085C90.2225 350.15 87.9612 241.089 5.97602 76.066Z"></path>
+        </svg>
+        <div class="text">
+          <span class="bigzzz">Z</span>
+          <span class="zzz">Z</span>
+        </div>
+      </div>
+      <div class="wallContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 500 126" class="wall">
+          <line stroke-width="6" stroke="#7C7C7C" y2="3" x2="450" y1="3" x1="50"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="85" x2="400" y1="85" x1="100"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="122" x2="375" y1="122" x1="125"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="43" x2="500" y1="43"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="1.99391" x2="115.5" y1="43.0061" x1="115.5"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="2.00002" x2="189" y1="43.0122" x1="189"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="2.00612" x2="262.5" y1="43.0183" x1="262.5"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="2.01222" x2="336" y1="43.0244" x1="336"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="2.01833" x2="409.5" y1="43.0305" x1="409.5"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="43" x2="153" y1="84.0122" x1="153"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="43" x2="228" y1="84.0122" x1="228"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="43" x2="303" y1="84.0122" x1="303"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="43" x2="378" y1="84.0122" x1="378"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="84" x2="192" y1="125.012" x1="192"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="84" x2="267" y1="125.012" x1="267"></line>
+          <line stroke-width="6" stroke="#7C7C7C" y2="84" x2="342" y1="125.012" x1="342"></line>
+        </svg>
+      </div>
+    </div>
+  </div>
+ <!--------------------------loaderending--------------------------------------->   
+<!--------------------------navabar staring--------------------------------------->
+ <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="logo">AI Tech Fest 2025</a>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#Tech Events">Tech Events</a></li>
+                    <li><a href="# LLM Workshop">Workshop</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+ <!--------------------------navabar end----------------------------------------------------->
+ <!--------------------------backgun srt--------------------------------------------------->
+ <main>
+    <div class="containerrr">
+        <div class="mouse-follower"></div>
+        <div id="background"></div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>CYNEX</h1>
+                    <p>Harness the power of artificial intelligence to transform your business. Our cutting-edge AI solutions help you stay ahead in the digital age.</p>
+                    <p><i class="fa-regular fa-calendar" style="color:#6200EA;"></i>&nbsp;&nbsp;&nbsp;February 28, 2025</p>
+                    <p><i class="fa-solid fa-location-dot"  style="color:#6200EA;"></i>&nbsp;&nbsp;  Mar Baselios Christian College of Engineering and Technologies</p>
+                    <p>Harness the power of artificial intelligence to transform your business. Our cutting-edge AI solutions help you stay ahead in the digital age.</p>
+                    <a href="#events" class="cta-button">Get Started</a>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Gaming Section -->
+        <section class="hero has-before" id="home">
+            <div class="container">
+                <p class="section-subtitle">Enjoy The Games</p>
+                <h1 class="h1 title hero-title">Epic Games Made For <br> True Gamers!</h1>
+                <div class="hero-banner">
+                    <div class="image-container">
+                        <img src="/image/hero-banner.png" width="850" height="414" alt="hero banner" class="img w-100">
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!---->
+    <section id="events" class="events">
+        <div class="container">
+            <h2>Upcoming online Events</h2>    <!-- <h2>Upcoming Tech Events</h2>-->
+            <div class="event-grid">
+                <div class="event-card">
+                    <img src="/image/fc mobile.jpeg" alt="Football Tournament">
+                    <h3>Fc mobile Tournament</h3>
+                    <p>Join the excitement in this thrilling online event!</p>
+                  <a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration: none; color: inherit;"> 
+                    <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 36 36"
+                          width="36px"
+                          height="36px"
+                        >
+                          <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                          <path
+                            fill="#e53935"
+                            d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"
+                          ></path>
+                          <path
+                            fill="#b71c1c"
+                            d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"
+                          ></path>
+                          <path
+                            fill="#01579b"
+                            d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"
+                          ></path>
+                          <path
+                            fill="#81d4fa"
+                            d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"
+                          ></path>
+                          <path
+                            fill="#e1f5fe"
+                            d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"
+                          ></path>
+                        </svg>
+                        <span class="now">now!</span>
+                        <span class="play">play</span>
+                      </button>
+                </a>      
+                </div>
+                <div class="event-card">
+                    <img src="/image/pubg.jpg" alt="PUBG Championship">
+                    <h3>PUBG Championship</h3>
+                    <p>Battle it out in the ultimate PUBG showdown!</p>
+                    <a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration: none; color: inherit;"> 
+                    <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 36 36"
+                          width="36px"
+                          height="36px"
+                        >
+                          <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                          <path
+                            fill="#e53935"
+                            d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"
+                          ></path>
+                          <path
+                            fill="#b71c1c"
+                            d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"
+                          ></path>
+                          <path
+                            fill="#01579b"
+                            d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"
+                          ></path>
+                          <path
+                            fill="#81d4fa"
+                            d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"
+                          ></path>
+                          <path
+                            fill="#e1f5fe"
+                            d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"
+                          ></path>
+                        </svg>
+                        <span class="now">now!</span>
+                        <span class="play">play</span>
+                      </button>
+                    </a>
+                </div>
+                <div class="event-card">
+                    <img src="/image/free fire tournament poster desing comment for the psd.jpeg" alt="Free Fire Cup">
+                    <h3>Free Fire Cup</h3>
+                    <p>Compete in the hottest mobile battle royale game!</p>
+                    <a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration: none; color: inherit;"> 
+                    <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 36 36"
+                          width="36px"
+                          height="36px"
+                        >
+                          <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                          <path
+                            fill="#e53935"
+                            d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"
+                          ></path>
+                          <path
+                            fill="#b71c1c"
+                            d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"
+                          ></path>
+                          <path
+                            fill="#01579b"
+                            d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"
+                          ></path>
+                          <path
+                            fill="#81d4fa"
+                            d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"
+                          ></path>
+                          <path
+                            fill="#e1f5fe"
+                            d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"
+                          ></path>
+                        </svg>
+                        <span class="now">now!</span>
+                        <span class="play">play</span>
+                      </button>
+                    </a>
+                </div>
+                <div class="event-card">
+                    <img src="/image/pes.jpeg" alt="PES eFootball League">
+                    <h3>PES eFootball League</h3>
+                    <p>Show off your skills in this premier eFootball competition!</p>
+                    <a href="https://forms.gle/cdXN3FU2tyUnWWUH7" style="text-decoration: none; color: inherit;"> 
+                    <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 36 36"
+                          width="36px"
+                          height="36px"
+                        >
+                          <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                          <path
+                            fill="#e53935"
+                            d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"
+                          ></path>
+                          <path
+                            fill="#b71c1c"
+                            d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"
+                          ></path>
+                          <path
+                            fill="#01579b"
+                            d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"
+                          ></path>
+                          <path
+                            fill="#81d4fa"
+                            d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"
+                          ></path>
+                          <path
+                            fill="#212121"
+                            d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"
+                          ></path>
+                          <path
+                            fill="#e1f5fe"
+                            d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"
+                          ></path>
+                        </svg>
+                        <span class="now">now!</span>
+                        <span class="play">play</span>
+                      </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ </main>       
+       
+<!--------------------------backgun end----------------------------------------------------->
+<!---------------------------- Tech Events Section start----------------------------------------------->
+<section id="Tech Events" class="tech-timeline">
+  <h2 class="timeline-title">Upcoming Tech Events</h2>
+  <div class="timeline-line"></div>
+  
+  <!-- Timeline Event 1 -->
+  <div class="timeline-event" style="animation: fadeInUp 0.8s 0.7s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Online Gaming Expo</h3>
+      <p class="timeline-desc">"Play anytime, anywhere with our free online games! Enjoy action, strategy, puzzles, and multiplayer fun—no downloads needed. Perfect for solo or friend showdowns, our growing collection has something for every gamer. Dive in now!"</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+  
+  <!-- Timeline Event 2 -->
+  <div class="timeline-event" style="animation: fadeInUp 0.8s 0.8s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Capture the Flag Challenge</h3>
+      <p class="timeline-desc">"Ready for intense Capture the Flag action? Jump into fast-paced, no-download CTF games where strategy meets skill. Team up or go solo, steal the flag, and outsmart your rivals in our thrilling online collection. Play now and claim victory!".</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+  
+  <!-- Timeline Event 3 -->
+  <div class="timeline-event" style="animation: fadeInUp 0.8s 0.9s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Blind Typing games!</h3>
+      <p class="timeline-desc">"Boost your speed and master the keys with our Blind Typing games! Dive into fun, no-download challenges that sharpen your typing skills. Perfect for all levels—race against time or compete with friends. Start typing and level up now!".</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+  
+  <!-- Timeline Event 4 -->
+  <div class="timeline-event" style="animation: fadeInUp 0.8s 1s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Image Prompt for Website</h3>
+      <p class="timeline-desc">"A colorful, action-packed scene of a gamer at a glowing keyboard, typing at lightning speed with abstract code and game elements (like flags or puzzles) swirling in the background. Bold neon hues of blue, purple, and green, with a sleek, futuristic vibe to draw in online gaming fans.".</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+   <!-- Timeline Event 5 -->
+   <div class="timeline-event" style="animation: fadeInUp 0.8s 1s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Keyboard Assembly Game</h3>
+      <p class="timeline-desc">"Build your perfect keyboard and test your skills! Assemble keys, tweak layouts, and race against time in this fast-paced online challenge. No downloads needed—jump in, create, and type your way to victory!"</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+   <!-- Timeline Event 6 -->
+   <div class="timeline-event" style="animation: fadeInUp 0.8s 1s forwards;">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <span class="timeline-date">March 12, 2025</span>
+      <h3 class="timeline-title-event">Treasure Hunt Games</h3>
+      <p class="timeline-desc">"Embark on epic online treasure hunts! Explore thrilling puzzles, uncover hidden loot, and outsmart rivals—no downloads needed. Dive into the adventure solo or with friends and claim your riches today!"</p>
+      <a href="#" class="timeline-button">Register Now</a>
+    </div>
+  </div>
+     <!-- Timeline Event 7 -->
+     <div class="timeline-event" style="animation: fadeInUp 0.8s 1s forwards;">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">March 12, 2025</span> 
+        <h3 class="timeline-title-event">AI-Generated Video Adventures</h3>
+        <p class="timeline-desc">"Experience gaming like never before with AI-crafted videos! Watch thrilling treasure hunts and epic challenges come to life—unique, instant, and no downloads required. Dive into the future of fun now!"</p>
+        <a href="#" class="timeline-button">Register Now</a>
+      </div>
+    </div>
+</section>
+<!--------------------------Tech Events Section end---------------------------------------------------->
+<!-------------------------Workshop start--------------------------------------------------->
+<section id=" LLM Workshop">
+  <h2 class="tech-section-title">AI & LLM Workshop</h2>
+  <div class="tech-events-container">
+    <!-- Event Card 1 -->
+    <div class="tech-event-card" style="animation: fadeInUp 0.8s 0.3s forwards;">
+      <div class="tech-event-tag">AI & LLM Workshop</div>
+      <img src="/image/workshop1.jpg" alt="DevCon 2025">
+      <div class="tech-event-details">
+        <span class="tech-event-date">March 15 2025</span>
+        <h3 class="tech-event-title">AI & LLM Workshop</h3>
+        <p class="tech-event-location">online workshop</p>
+        <p class="tech-event-desc">AI & LLM Workshop at IIT Hyderabad Join this transformative workshop on Artificial Intelligence and Large Language Models, organized by the IEEE Student Branch.</p>
+        <a href="https://tek-learn.com/a/va_2gbid5eolfx-dc4dpg
+        " class="tech-event-button"><span>Register</span></a>
+      </div>
+    </div>
+    
+    <!-- Event Card 2 -->
+    <div class="tech-event-card" style="animation: fadeInUp 0.8s 0.4s forwards;">
+      <div class="tech-event-tag">AI-Driven CAD Workshop</div>
+      <img src="/image/workshop2.jpg" alt="AI Summit">
+      <div class="tech-event-details">
+        <span class="tech-event-date">March 22, 2025</span>
+        <h3 class="tech-event-title">AI-Driven CAD Workshop</h3>
+        <p class="tech-event-location">online workshop</p>
+        <p class="tech-event-desc">AI-Driven Computer Aided Design Workshop Discover the synergy of AI and Computer Aided Design through this exclusive event hosted at IIT Hyderabad.</p>
+        <a href="https://tek-learn.com/a/jzdaysw7l2uszjrf3xatn" class="tech-event-button"><span>Register</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--------------------------Workshop end---------------------------------------------------->
+<!---------------------------food corter start---------------------------------------------------->
+<section class="food-section">
+  <!-- Background shapes -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+  
+  <div class="food-header">
+      <span class="food-eyebrow">Taste the Future</span>
+      <h2 class="food-title">AI Food Party</h2>
+      <p class="food-subtitle">Experience culinary creations designed by artificial intelligence, blending data-driven flavor combinations with gastronomic traditions</p>
+  </div>
+  
+  <div class="food-grid">
+      <div class="food-card" style="--i: 1">
+          <span class="course-label">AI Day</span>
+          <div class="food-card-image">
+              <img src="/image/food1.jpeg" alt="Neural Network Noodles" />
+              <div class="ai-indicator">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.5 5.9-4 7.5M12 2a9 9 0 0 0-9 9c0 3.1 1.5 5.9 4 7.5M12 2v2M20.2 7l-1.4 1.4M3.8 7l1.4 1.4M21 13h-2M5 13H3M18 19l-1-1M7 19l1-1"></path>
+                      <circle cx="12" cy="11" r="4"></circle>
+                      <path d="M12 15v4"></path>
+                  </svg>
+                  Food Fest
+              </div>
+              <div class="stock-indicator available">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                  Available
+              </div>
+          </div>
+          <div class="food-card-content">
+              <h3 class="food-card-title">AI Day & Food Fest</h3>
+              <p class="food-card-description">AI Day & Food Fest at MBCCET Join us at Mar Baselios Christian College of Engineering and Technology (MBCCET) for an exciting AI Day and Food Fest! Experience cutting-edge AI innovations alongside a vibrant culinary celebration featuring local delicacies and global flavors.</p>
+              
+              <div class="food-tags">
+                  <span class="food-tag">veg</span>
+                  <span class="food-tag">non-veg</span>
+              </div>
+              
+              <div class="dish-info">
+                  <div class="dish-stat">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                      <span>15 min prep</span>
+                  </div>
+                  <div class="dish-stat">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7zM15.42 15.42l6.37 6.37"></path>
+                          <path d="M19.73 10.35a10.1 10.1 0 0 0-.2-1.4 10 10 0 0 0-5.9-6.7 10.12 10.12 0 0 0-8.4.4"></path>
+                          <path d="M4.89 4.8a10 10 0 0 0-1.2 1.6"></path>
+                      </svg>
+                      <span>98% match</span>
+                  </div>
+              </div>
+              
+              <div class="rating">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <span>(128 ratings)</span>
+              </div>
+              
+              <button class="taste-button">Request Sample</button>
+          </div>
+      </div>
+  </div>  
+</section>
+
+<!---------------------------food corter end------------------------------------------------------>
+<!--------------------------sponsors start-------------------------------------------------->
+<!--<div>
+    <h2 class="tech-event">Sponsors for Events</h2>
+
+    <div class="carousel">
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">CES (Consumer Electronics Show)</div>
+                <div class="num">01</div>
+                <img src="/image/Designer (1).jpeg" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Warsaw</div>
+                <div class="num">02</div>
+                <img
+                    src="https://media.istockphoto.com/id/1150545984/it/foto/palazzo-moderno-di-lusso-con-piscina.jpg?s=612x612&w=0&k=20&c=Pbrai_VGc9tUviMCF1UaBErdS1YGyIVWsD29jzMZwTY=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Madrid</div>
+                <div class="num">03</div>
+                <img
+                    src="https://media.istockphoto.com/id/1214351345/it/foto/guardando-direttamente-lo-skyline-del-quartiere-finanziario-nel-centro-di-londra-immagine-di.jpg?s=612x612&w=0&k=20&c=oNNbPzPvcQ-4RA6AeatNIxHQIafBiXmDRtUUY0Ska-I=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Sydney</div>
+                <div class="num">04</div>
+                <img
+                    src="https://media.istockphoto.com/id/904390980/it/foto/foto-di-architettura-contemporanea-astratta.jpg?s=612x612&w=0&k=20&c=_P4Wmx5nq5MeDuimpNklKCBlrLovmCyd9lfiMKeJZDs=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Istanbul</div>
+                <div class="num">05</div>
+                <img
+                    src="https://media.istockphoto.com/id/130408311/it/foto/piscina-allesterno-della-casa-moderna-al-crepuscolo.jpg?s=612x612&w=0&k=20&c=ZoVjx7uDjoHKmpM1ayW6UR1SQOoYh_xx-QMG_qeOYs0=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Prague</div>
+                <div class="num">06</div>
+                <img
+                    src="https://media.istockphoto.com/id/1299954175/it/foto/villa-cubica-moderna.jpg?s=612x612&w=0&k=20&c=DhGhb3c1E3DW_fbrWJ_R_Zh0Lbwu6syFeRLsKlZ9no8=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Munich</div>
+                <div class="num">07</div>
+                <img
+                    src="https://media.istockphoto.com/id/926689776/it/foto/vista-ad-angolo-basso-dei-grattacieli-di-new-york.jpg?s=612x612&w=0&k=20&c=DmEB0Ty7ZwDnBoU5SuA8FNevOp4G1UcECw5aS4vA9A8=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Venice</div>
+                <div class="num">08</div>
+                <img
+                    src="https://media.istockphoto.com/id/1191376167/it/foto/villa-dellisola.jpg?s=612x612&w=0&k=20&c=PKslWo4FdbjinohKQlK_oWL34jqAsnzMTdy2bxEAf-I=" />
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">Oslo</div>
+                <div class="num">09</div>
+                <img
+                    src="https://media.istockphoto.com/id/184316397/it/foto/londra-edifici-aziendali.jpg?s=612x612&w=0&k=20&c=XqrRxEPzFnwRFk7PQrCiu9-FPfCTPyMe5BKKaxYXCs8=" />
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="carousel-box">
+                <div class="title">London</div>
+                <div class="num">10</div>
+                <img
+                    src="https://media.istockphoto.com/id/184619832/it/foto/distretto-finanziario-al-crepuscolo-londra.jpg?s=612x612&w=0&k=20&c=RAThrJOBY6vhlT6-kQpu9-9jLEzWToYfdw46S8B0Mu0=" />
+            </div>
+        </div>
+    </div>
+
+    <div class="layout">
+        <!-- <div class="box">High-end, full-service<br />visual content creation<br />for lifestyle branding.</div> -->
+    </div>
+
+    <!--<a href="https://www.supah.it" target="_blank" class="logo">S</a>
+    <div class="social">
+        <a href="https://www.linkedin.com/in/fabio-ottaviani-82b0776/" target="_blank"><svg>
+                <use xlink:href="#ico-linkedin"></use>
+            </svg></a>
+        <a href="https://www.instagram.com/supahfunk/" target="_blank"><svg>
+                <use xlink:href="#ico-instagram"></use>
+            </svg></a>
+    </div>
+
+    <svg style="display: none">
+        <symbol id="ico-instagram" viewBox="0 0 35 35">
+            <circle opacity=".2" cx="17.5" cy="17.5" r="17" stroke="var(--fill)" fill="none"></circle>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M24.944 20.476c.028-.457.042-1.282.042-2.476s-.014-2.019-.042-2.476c-.056-1.09-.378-1.93-.965-2.517s-1.422-.91-2.503-.965C21.018 12.014 20.194 12 19 12s-2.019.014-2.476.042c-1.081.047-1.92.368-2.517.965s-.918 1.436-.965 2.518C13.014 15.98 13 16.805 13 18c0 1.194.014 2.019.042 2.476.047 1.09.368 1.93.965 2.517s1.436.91 2.518.965c.466.028 1.29.042 2.475.042 1.184 0 2.01-.014 2.476-.042 1.072-.047 1.906-.368 2.503-.965.597-.597.918-1.436.965-2.517ZM19 13.075h-1.427c-.186 0-.438.01-.755.029a11.61 11.61 0 0 0-.797.07c-.215.028-.401.08-.56.154-.26.102-.489.251-.685.447-.196.196-.35.425-.461.685-.056.15-.103.336-.14.56a7.843 7.843 0 0 0-.084.811 7.113 7.113 0 0 0-.014.741c.01.178.01.453 0 .826-.01.373-.01.573 0 .601.01.028.01.228 0 .601s-.01.648 0 .826c.01.177.014.424.014.74 0 .318.028.588.084.812l.14.56c.112.26.265.489.461.685.196.196.425.345.685.447.15.056.336.108.56.154.224.047.49.07.797.07.308 0 .56.01.755.028.196.019.471.019.826 0 .354-.019.554-.019.601 0 .047.019.242.019.587 0s.62-.019.826 0c.205.019.456.01.755-.028.298-.037.569-.06.811-.07.242-.01.424-.06.546-.154.26-.102.494-.251.699-.447a1.75 1.75 0 0 0 .447-.686c.056-.149.103-.335.14-.559.038-.224.066-.494.084-.811.019-.317.023-.564.014-.741a11.82 11.82 0 0 1 0-.826c.01-.373.01-.573 0-.601-.01-.028-.01-.228 0-.601s.01-.648 0-.826c-.01-.177-.014-.424-.014-.74 0-.318-.028-.588-.084-.812l-.14-.56a1.956 1.956 0 0 0-1.147-1.133 3.979 3.979 0 0 0-.545-.153 3.915 3.915 0 0 0-.811-.07c-.326 0-.578-.01-.755-.028a5.916 5.916 0 0 0-.826 0c-.372.019-.568.019-.587 0Zm3.706 2.225c.14-.14.21-.308.21-.504a.57.57 0 0 0-.21-.503.767.767 0 0 0-.517-.21.718.718 0 0 0-.504.21.622.622 0 0 0-.21.503c.01.196.08.364.21.504s.299.21.504.21c.205 0 .377-.07.517-.21ZM22.063 18c0 .849-.298 1.576-.895 2.182a2.882 2.882 0 0 1-2.168.895 3.075 3.075 0 0 1-2.182-.895c-.606-.588-.904-1.315-.895-2.182.01-.867.308-1.594.895-2.182.588-.587 1.315-.886 2.182-.895.867-.01 1.59.29 2.168.895.578.606.876 1.333.895 2.182Zm-1.077 0a1.95 1.95 0 0 0-.573-1.413A1.897 1.897 0 0 0 19 16c-.56 0-1.03.196-1.413.587A2.001 2.001 0 0 0 17 18c-.01.55.186 1.021.587 1.413.401.391.872.587 1.413.587.54 0 1.012-.196 1.413-.587.4-.392.592-.863.573-1.413Z"
+                transform="translate(-1.5 -0.5)" fill="var(--fill)"></path>
+        </symbol>
+
+        <symbol id="ico-linkedin" viewBox="0 0 35 35">
+            <circle opacity=".2" cx="17.5" cy="17.5" r="17" stroke="var(--fill)" fill="none"></circle>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.3025 14.0835C15.3025 14.3845 15.1934 14.6403 14.9752 14.851C14.757 15.0617 14.4786 15.167 14.14 15.167C13.8014 15.167 13.5267 15.0617 13.316 14.851C13.1053 14.6403 13 14.3807 13 14.0722C13 13.7637 13.1053 13.5079 13.316 13.3047C13.5267 13.1016 13.8051 13 14.1512 13C14.4974 13 14.772 13.1016 14.9752 13.3047C15.1783 13.5079 15.2874 13.7675 15.3025 14.0835ZM13.0677 23V16.0248H15.2348V23H13.0677ZM16.4763 16.0248C16.5064 16.8676 16.5214 17.6125 16.5214 18.2596V23H18.7111V18.9819C18.7111 18.7111 18.7336 18.5305 18.7788 18.4402C18.9895 17.8984 19.3582 17.6275 19.8849 17.6275C20.6223 17.6275 20.991 18.1317 20.991 19.14V23H23.158V18.8691C23.158 17.8758 22.9285 17.1272 22.4695 16.623C22.0105 16.1189 21.4048 15.8668 20.6524 15.8668C19.6742 15.8668 18.9594 16.243 18.5079 16.9955H18.4628L18.3499 16.0248H16.4763Z"
+                transform="translate(0 -1)" fill="var(--fill)"></path>
+        </symbol>
+    </svg>
+</div>
+<!---------------------------sponsors  end----------------------------------------------------->
+<br><br><br><br>
+<!--------------------------movie time start---------------------------------------------------->
+<!-- AI Movie Day Section -->
+<section class="movie-section">
+  <div class="particles">
+    <!-- Generated dynamically via JavaScript -->
+  </div>
+  <div class="movie-content">
+    <h2 class="movie-title">AI Day: Special Screening</h2>
+    <div class="movie-info">
+      <div class="movie-details">
+        <div class="movie-date-time">
+          <div class="movie-item movie-date">Feb 17, 2025</div>
+          <div class="movie-item movie-time">7:30 PM</div>
+        </div>
+        <p class="movie-description">
+          Join us for a special screening of "Artificial: The New Frontier," an award-winning documentary exploring the ethical implications and future possibilities of artificial intelligence. The screening will be followed by a panel discussion with leading AI researchers and ethicists.
+        </p>
+        <a href="#" class="movie-button">Reserve Seats</a>
+      </div>
+      <div class="movie-poster">
+        <img src="/image/movies.jpg" alt="AI Movie Poster" >
+      </div>
+    </div>
+  </div>
+</section>
+<!--------------------------movie time end------------------------------------------------->
+<br><br><br>
+<!-------------------------ai partment about start----------------------------------------------->
+ <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>About Our AI Vision</h2>
+                    <p>Founded with a passion for artificial intelligence innovation, our mission is to redefine digital experiences through cutting-edge AI technology. We believe in creating intelligent systems that form meaningful connections between brands and their audiences through adaptive, learning interfaces.</p>
+                    <p>Our team of AI researchers and engineers works tirelessly to push the boundaries of what's possible in machine learning and neural networks, crafting solutions that are not just technically advanced but also ethically designed with humans at the center.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number">85%</div>
+                            <div class="stat-text">Accuracy Improvement</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10M+</div>
+                            <div class="stat-text">Data Points Processed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-text">AI-Powered Assistance</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="ai-container" id="ai-visual">
+                        <div class="glow-effect"></div>
+                        <div class="grid-overlay"></div>
+                        
+                        <div class="brain-container">
+                            <div class="brain-ring"></div>
+                            <div class="brain-ring"></div>
+                            <div class="brain-ring"></div>
+                            <div class="brain-center"></div>
+                        </div>
+                        
+                        <!-- Elements will be added via JavaScript -->
+                        <div id="particles-container"></div>
+                        <div id="data-streams-container"></div>
+                        <div id="connections-container"></div>
+                        <div id="data-nodes-container"></div>
+                        <div id="floating-text-container"></div>
+                        
+                        <button class="interact-button" id="interact-button">
+                            Interact with AI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-------------------------ai partment about end------------------------------------------------>
+<!--------------------------contant str---------------------------------------------------->
+<div id="contact" class="contact-container">
+    <div class="header">
+      <h1>Connect with AI Innovation</h1>
+      <p>Join us in shaping the future of artificial intelligence</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h2>Event Details</h2>
+        <p>Join our upcoming AI Summit featuring cutting-edge developments in machine learning and artificial intelligence.</p>
+        <div class="social-icons">
+          <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https://www.instagram.com/.cynex.?igsh=bzF3Nm14M3Y0bmt3" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h2>Contact Information</h2>
+        <p>📧 Email: cynex2024@gmail.com</p>
+        <p>📱 Phone: 9961774438</p>
+        <p>📍 Location: mbccet</p>
+      </div>
+    </div>
+  </div>
+<!--------------------------contant end---------------------------------------------------->
+<!--------------------------footer str---------------------------------------------------->
+<div class="footer-size">
+<footer class="footer">
+    <div class="container1">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+                    AI Solutions
+                </h3>
+                <p>Empowering the future with intelligent technologies.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="quick-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Newsletter</h4>
+                <p>Stay updated with our latest AI breakthroughs.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI Solutions. All rights reserved.</p>
+        </div>
+    </div>
+    <div class="footer-gradient"></div>
+</footer>
+</div>
+<!--------------------------footer end----------------------------------------------------->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js'></script><script  src="./script.js"></script>
+ <script src="script.js"></script>
+    <script>
+        // Background initialization
         class InteractiveBackground {
             constructor() {
                 this.container = document.querySelector('.container');
@@ -130,4 +1030,8 @@
         // Initialize the background when the page loads
         window.addEventListener('load', () => {
             new InteractiveBackground();
-        });</script></body></html>
+        });
+        
+    </script>
+</body>
+</html>
